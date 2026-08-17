@@ -1,22 +1,29 @@
-موقع المشروع
+# Telegram AI Bot (Arabic)
 
-أضفت الآن دعم تشغيل بوت تيليجرام يرسل الرسائل إلى واجهة الـ AI ويعيد الإجابات.
+بوت تليجرام بسيط يربط بين Telegram و OpenAI ويُجيب بالعربية.
 
-تشغيل البوت (محلياً باستخدام polling):
+## المتطلبات
+- Python 3.10+
+- مفتاح Telegram Bot من BotFather (TELEGRAM_TOKEN)
+- مفتاح OpenAI (OPENAI_API_KEY)
 
-1) أنشئ .env من المثال واملأ القيم:
-   cp .env.example .env
-   ثم املأ KEY_ONE و TELEGRAM_TOKEN
+## تشغيل محلياً
+1. انسخ الملفات لمجلد.
+2. أنشئ ملف `.env` داخل المجلد بناءً على `.env.example`.
+3. ثبت الحزم:
+   pip install -r requirements.txt
+4. شغّل البوت:
+   python main.py
 
-2) ثبّت المتطلبات:
-   python3 -m pip install -r requirements.txt
+## تشغيل بـ Docker
+1. بناء الصورة:
+   docker build -t telegram-ai-bot .
+2. تشغيل الحاوية:
+   docker run --env-file .env telegram-ai-bot
 
-3) شغّل البوت:
-   python3 telegram_bot.py
+## ملاحظات أمان
+- لا ترفع مفاتيحك للمستودع. احتفظ بها في متغيرات بيئية أو Secrets في المزود.
+- إذا تريد حفظ سياق المحادثة لكل مستخدم (ذاكرة)، نقدر نضيف تخزين SQLite/Postgres مع ترشيق السياق قبل الإرسال إلى OpenAI.
 
-ملاحظات أمنية وتشغيلية
-- احفظ توكن البوت ومفتاح الـAPI في متغيرات البيئة ولا تضعها في الكود.
-- هذا المثال يستخدم polling (سهل للتطوير). للإنتاج فكّر في استخدام webhooks.
-- تأكد من أن API_URL وبنية JSON في ai_client.ask_ai متوافقة مع مزوّد الخدمة الذي تستخدمه.
-
-احتجت للمزامنة مع مزوّد محدد؟ أخبرني اسم المزود (مثال: OpenAI, Google Gemini, Azure OpenAI) وسأكيّف بنية الطلب والـheaders لتتوافق معه.
+## إذا أردت رفع الكود إلى GitHub
+أرسل لي اسم الريبو بصيغة `owner/repo` وسأرفع الملفات على فرع `telegram-ai-bot` وأفتح PR إن رغبت.
